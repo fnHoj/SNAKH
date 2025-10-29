@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.28)
-project(CMakeSFMLProject LANGUAGES CXX)
+project(SNAKH)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(EXECUTABLE_OUTPUT_NAME "snakh")
 
 include(FetchContent)
 FetchContent_Declare(SFML
@@ -12,6 +13,14 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
+add_executable(main
+    src/irrationoid.hpp
+    src/geoh.hpp
+    src/game.hpp
+    src/game_debug.hpp
+
+    src/main.cpp
+)
+set_target_properties(main PROPERTIES OUTPUT_NAME ${EXECUTABLE_OUTPUT_NAME})
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
