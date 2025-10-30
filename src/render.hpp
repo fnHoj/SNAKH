@@ -35,8 +35,8 @@ const sf::Vector2f proj_screen(const Vec& p, unsigned direction = 0, double t = 
 void ball(sf::RenderWindow& window, const Vec& p, double r, unsigned direction = 0, double t = 0) {
     const pair<pair<double, double>, double> pos = proj(p, direction, t);
     double R = 400.0 * r * pos.second;
-    if (R < 8)
-        R = 8;
+    if (R < 4)
+        R = 4;
     sf::CircleShape circ(R);
     circ.setPosition(sf::Vector2f(400 * (1.0 - pos.first.second) - R, 400 * (1.0 - pos.first.first) - R));
     circ.setFillColor({0xff, 0x00, 0x00});
