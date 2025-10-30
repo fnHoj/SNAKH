@@ -11,7 +11,8 @@ private:
     sf::Clock clock;
     GridLines grid;
 
-    static const unsigned T;
+    static const unsigned minT, maxT;
+    unsigned T;
 
     unsigned steptimer;
     unsigned curr_direction;
@@ -76,15 +77,20 @@ private:
                     case sf::Keyboard::Scancode::Right:
                         turn_to(3);
                         break;
-                    default:
+                    case sf::Keyboard::Scancode::Hyphen:
+                        half_time();
                         break;
+                    case sf::Keyboard::Scancode::Equal:
+                        double_time();
+                        break;
+                    default:;
                 }
             }
         }
     }
 public:
-    GamePlatform(sf::RenderWindow& window):
-            window(window), clock(), grid(),
+    GamePlatform(sf::RenderWindow& window, unsigned T = 221184):
+            window(window), T(T), clock(), grid(),
             steptimer(), curr_direction(), directions() {
         clock.restart();
     }
@@ -107,6 +113,23 @@ public:
         render(window, game, grid, curr_direction, double(steptimer) / T);
         window.display();
     }
+    bool double_time() {
+        unsigned tmp = (T / 3) << 1;
+        if (tmp < minT)
+            return false;
+        T = tmp;
+        steptimer = (steptimer / 3) << 1;
+        return true;
+    }
+    bool half_time() {
+        unsigned tmp = T + (T >> 1);
+        if (tmp > maxT)
+            return false;
+        T = tmp;
+        steptimer += steptimer >> 1;
+        return true;
+    }
 };
 
-const unsigned GamePlatform::T = 250000;
+const unsigned GamePlatform::minT = 65536;
+const unsigned GamePlatform::maxT = 2000000;

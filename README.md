@@ -4,6 +4,8 @@
 
 Controls:
 - WASD / arrows: move around
+- Equals `=`: increase speed
+- Hyphen `-`: decrease speed
 - R: restart
 - Esc: exit
 
