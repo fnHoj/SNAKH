@@ -48,6 +48,10 @@ private:
                     curr_direction = pop_pending_direction();
                     steptimer -= T;
                 }
+                else {
+                    steptimer = T;
+                    break;
+                }
             }
         }
         while (const auto event = window.pollEvent()) {
