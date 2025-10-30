@@ -3,6 +3,7 @@
 #include "irrationoid.hpp"
 
 namespace geoh {
+    using namespace std;
     typedef irrationoid::Irrationoid<long long, 5> irr;
     const irr PHI = irr(1, 1, 2);
     const irr phi = irr(-1, 1, 2);
@@ -10,6 +11,11 @@ namespace geoh {
     
     struct Vec {
         irr z, x, y;
+
+        operator string() const {
+            return "(" + string(z) + ", " + string(x) + ", " + string(y) + ")";
+        }
+
         Vec(): z(0), x(0), y(0) {}
         Vec(const irr& z, const irr& x, const irr& y): z(z), x(x), y(y) {}
     
@@ -110,6 +116,14 @@ namespace geoh {
             xz(xz), xx(xx), xy(xy),
             yz(yz), yx(yx), yy(yy) {}
         
+        operator string() const {
+            return "[\n"
+                + string(zz) + ", " + string(zx) + ", " + string(zy) + "\n"
+                + string(xz) + ", " + string(xx) + ", " + string(xy) + "\n"
+                + string(yz) + ", " + string(yx) + ", " + string(yy) + "\n"
+                + "]";
+        }
+
         inline const Mat& operator+() const {
             return *this;
         }

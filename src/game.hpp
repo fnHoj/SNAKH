@@ -20,22 +20,22 @@ namespace snakh {
     const Mat adj[4] = {
         {
             PHI, PHI, 0,
-            1 , PHI, 0,
-            0 ,  0 , 1
+             1 , PHI, 0,
+             0 ,  0 , 1
+        },
+        {
+            PHI, 0, PHI,
+             0 , 1,  0 ,
+             1 , 0, PHI
         },
         {
             PHI, -PHI, 0,
             -1 ,  PHI, 0,
-            0 ,   0 , 1
-        },
-        {
-            PHI, 0, PHI,
-            0 , 1,  0 ,
-            1 , 0, PHI
+             0 ,   0 , 1
         },
         {
             PHI, 0, -PHI,
-            0 , 1,   0 ,
+             0 , 1,   0 ,
             -1 , 0,  PHI
         }
     };
@@ -71,17 +71,17 @@ namespace snakh {
             if (dead)
                 return false;
             direction &= 3;
-            if (!append(to_head * sid[direction]))
+            const Vec p = to_head * sid[direction];
+            if (!append(p))
                 return false;
-            to_orig = to_orig * adj[direction ^ 2];
-            to_head = adj[direction] * to_head;
+            head = p;
+            to_orig = adj[direction ^ 2] * to_orig;
+            to_head = to_head * adj[direction];
             return true;
         }
-        const Vec pop() {
-            const Vec tail = snake.front();
+        void pop() {
             snake.pop();
-            is_snake.erase(tail);
-            return tail;
+            is_snake.erase(snake.front());
         }
         const Vec random_empty_tile(unsigned turns = 32){
             Vec ans(1, 0, 0);
@@ -102,9 +102,10 @@ namespace snakh {
                 snake(), is_snake() {
             for (unsigned i = 0; i < len; i++) {
                 head *= adj[2];
+                to_orig = adj[0] * to_orig;
+                to_head = to_head * adj[2];
             }
             snake.push(head);
-            is_snake.insert(head);
             for (unsigned i = 1; i < len; i++) {
                 advance(0);
             }
@@ -126,8 +127,17 @@ namespace snakh {
         bool is_dead() const {
             return dead;
         }
+        const Vec get_head() const {
+            return head;
+        }
         const queue<Vec> get_snake() const {
             return snake;
+        }
+        const Mat get_to_orig() const {
+            return to_orig;
+        }
+        const Mat get_to_head() const {
+            return to_head;
         }
     };
 }
