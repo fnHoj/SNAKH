@@ -5,6 +5,7 @@
 #include <queue>
 #include <set>
 #include <random>
+#include <iostream>
 
 namespace snakh {
     using namespace geoh;
@@ -83,15 +84,16 @@ namespace snakh {
             snake.pop();
             is_snake.erase(snake.front());
         }
-        const Vec random_empty_tile(unsigned turns = 32){
+        const Vec random_empty_tile(unsigned turns = 4){
             Vec ans(1, 0, 0);
             Mat to_apple = Mat::identity;
             unsigned direction;
-            while (turns > 0 || is_snake.count(ans)) {
+            while (turns || is_snake.count(ans)) {
                 direction = uniform_int_distribution(0, 3)(gen);
                 ans = to_apple * sid[direction];
                 to_apple = adj[direction] * to_apple;
-                turns--;
+                if (turns)
+                    turns--;
             }
             return ans;
         }
@@ -127,16 +129,19 @@ namespace snakh {
         bool is_dead() const {
             return dead;
         }
-        const Vec get_head() const {
+        const Vec& get_head() const {
             return head;
         }
-        const queue<Vec> get_snake() const {
+        const Vec& get_apple() const {
+            return apple;
+        }
+        const queue<Vec>& get_snake() const {
             return snake;
         }
-        const Mat get_to_orig() const {
+        const Mat& get_to_orig() const {
             return to_orig;
         }
-        const Mat get_to_head() const {
+        const Mat& get_to_head() const {
             return to_head;
         }
     };
