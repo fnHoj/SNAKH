@@ -11,13 +11,28 @@ private:
     static const unsigned T;
 
     unsigned steptimer;
-    unsigned curr_direction, next_direction;
+    unsigned curr_direction;
+    queue<unsigned> directions;
 
+    inline unsigned first_pending_direction() {
+        return directions.empty() ? curr_direction : directions.front();
+    }
+    unsigned pop_pending_direction() {
+        unsigned ans = curr_direction;
+        if (!directions.empty()) {
+            ans = directions.front();
+            directions.pop();
+        }
+        return ans;
+    }
+    inline unsigned last_pending_direction() {
+        return directions.empty() ? curr_direction : directions.back();
+    }
     bool turn_to(unsigned direction) {
         direction &= 3;
-        if ((direction ^ curr_direction) == 2)
+        if (!((direction ^ last_pending_direction()) & 1))
             return false;
-        next_direction = direction;
+        directions.push(direction);
         return true;
     }
 
@@ -26,7 +41,7 @@ private:
             steptimer += dt.asMicroseconds();
             while (steptimer >= T && !game.is_dead()) {
                 if (game.move(curr_direction)) {
-                    curr_direction = next_direction;
+                    curr_direction = pop_pending_direction();
                     steptimer -= T;
                 }
             }
@@ -67,14 +82,17 @@ private:
 public:
     GamePlatform(sf::RenderWindow& window):
             window(window), clock(),
-            steptimer(), curr_direction(), next_direction() {
+            steptimer(), curr_direction(), directions() {
         clock.restart();
     }
 
     void restart() {
         steptimer = 0;
         curr_direction = 0;
-        next_direction = 0;
+        while (!directions.empty()) {
+            directions.pop();
+        }
+        
         clock.restart();
         game = Game();
     }
