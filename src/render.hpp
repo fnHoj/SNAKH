@@ -3,8 +3,9 @@
 using namespace snakh;
 using namespace std;
 
-void render(sf::RenderWindow& window, const Game& game, unsigned direction, double t) {
+void render(sf::RenderWindow& window, const Game& game, const GridLines& grid, unsigned direction, double t) {
     draw_horizon(window, game, direction, t);
+    draw_grid(window, game, grid, direction, t);
     draw_apple(window, game, direction, t);
     draw_snake(window, game, direction, t);
 }

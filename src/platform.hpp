@@ -1,12 +1,15 @@
 #include "game.hpp"
+#include "gridlines.hpp"
 #include "render.hpp"
 using namespace snakh;
+using namespace gridlines;
 
 class GamePlatform {
 private:
     Game game;
     sf::RenderWindow& window;
     sf::Clock clock;
+    GridLines grid;
 
     static const unsigned T;
 
@@ -81,7 +84,7 @@ private:
     }
 public:
     GamePlatform(sf::RenderWindow& window):
-            window(window), clock(),
+            window(window), clock(), grid(),
             steptimer(), curr_direction(), directions() {
         clock.restart();
     }
@@ -101,7 +104,7 @@ public:
         const sf::Time dt = clock.restart();
         motion(dt);
         window.clear();
-        render(window, game, curr_direction, double(steptimer) / T);
+        render(window, game, grid, curr_direction, double(steptimer) / T);
         window.display();
     }
 };

@@ -1,7 +1,9 @@
 #pragma once
 #include "game.hpp"
+#include "gridlines.hpp"
 #include <SFML/Graphics.hpp>
 using namespace snakh;
+using namespace gridlines;
 using namespace std;
 
 const double dist = asinh(SQRT_PHI);
@@ -169,4 +171,15 @@ void draw_snake(sf::RenderWindow& window, const Game& game, unsigned direction, 
         snake.pop();
     }
     draw_head(window, game, direction, t);
+}
+
+const double grid_width = 0.05;
+const sf::Color grid_color(0x11, 0x11, 0x11);
+void draw_grid(sf::RenderWindow& window, const Game& game, const GridLines& grid, unsigned direction, double t) {
+    for (unsigned i = 0; i < grid.m; i++) {
+        segment(window, grid_width, grid_color,
+            grid.tile[grid.line[i][0]].pos,
+            grid.tile[grid.line[i][1]].pos,
+        direction, t);
+    }
 }
