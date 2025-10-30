@@ -45,7 +45,7 @@ namespace snakh {
     protected:
         default_random_engine gen;   
 
-        bool dead;
+        bool growing, dead;
         Vec head, apple;
         queue<Vec> snake;
         set<Vec> is_snake;
@@ -99,7 +99,7 @@ namespace snakh {
         }
     public:
         Game(unsigned len = 8):
-                gen(time(0)), dead(false), head(1, 0, 0),
+                gen(time(0)), growing(false), dead(false), head(1, 0, 0),
                 to_orig(Mat::identity), to_head(Mat::identity),
                 snake(), is_snake() {
             for (unsigned i = 0; i < len; i++) {
@@ -120,11 +120,18 @@ namespace snakh {
                 dead = true;
                 return false;
             }
-            if (head == apple)
+            if (head == apple) {
                 apple = random_empty_tile();
-            else
+                growing = true;
+            }
+            else {
                 pop();
+                growing = false;
+            }
             return true;
+        }
+        bool is_growing() const {
+            return growing;
         }
         bool is_dead() const {
             return dead;
