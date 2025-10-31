@@ -17,8 +17,12 @@ add_executable(main
     src/irrationoid.hpp
     src/geoh.hpp
     src/game.hpp
-    src/game_debug.hpp
-
+    
+    src/gridlines.hpp
+    src/graphical_utils.hpp
+    src/render.hpp
+    
+    src/platform.hpp
     src/main.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${EXECUTABLE_OUTPUT_NAME})
