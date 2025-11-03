@@ -9,6 +9,16 @@ Controls:
 - R: restart
 - Esc: exit
 
+Setup:
+
+```zsh
+# initialize build folder
+mkdir -p build
+cmake -S . -B build
+# start build
+cmake --build build
+```
+
 Your casual snake game - except everything takes place in a:
 
 ## Hyperbolic plane
