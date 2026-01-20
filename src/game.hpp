@@ -43,7 +43,7 @@ namespace snakh {
 
     class Game {
     protected:
-        default_random_engine gen;   
+        default_random_engine gen;
 
         bool growing, dead;
         Vec head, apple;

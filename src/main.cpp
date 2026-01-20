@@ -11,6 +11,6 @@ int main() {
 
     while (window.isOpen())
         g.frame();
-    
+
     return 0;
 }

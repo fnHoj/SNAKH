@@ -105,7 +105,7 @@ public:
         while (!directions.empty()) {
             directions.pop();
         }
-        
+
         clock.restart();
         game = Game();
     }

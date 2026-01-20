@@ -121,7 +121,7 @@ void draw_tail(sf::RenderWindow& window, const Game& game, unsigned direction, d
     y1 = SQRT_PHI * double(p1.y);
     interpolate(z0, x0, y0, z1, x1, y1, t, z0, x0, y0, (1 - t) * dist);
     segment(window, snake_width, snake_color, z0, x0, y0, z1, x1, y1, direction, t);
-    
+
 }
 void draw_head(sf::RenderWindow& window, const Game& game, unsigned direction, double t) {
     const Mat to_orig = game.get_to_orig();

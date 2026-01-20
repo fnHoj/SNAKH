@@ -17,11 +17,11 @@ add_executable(main
     src/irrationoid.hpp
     src/geoh.hpp
     src/game.hpp
-    
+
     src/gridlines.hpp
     src/graphical_utils.hpp
     src/render.hpp
-    
+
     src/platform.hpp
     src/main.cpp
 )

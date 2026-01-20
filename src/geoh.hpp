@@ -8,7 +8,7 @@ namespace geoh {
     const irr PHI = irr(1, 1, 2);
     const irr phi = irr(-1, 1, 2);
     const double SQRT_PHI = sqrt(double(PHI));
-    
+
     struct Vec {
         irr z, x, y;
 
@@ -18,7 +18,7 @@ namespace geoh {
 
         Vec(): z(0), x(0), y(0) {}
         Vec(const irr& z, const irr& x, const irr& y): z(z), x(x), y(y) {}
-    
+
         inline const Vec& operator+() const {
             return *this;
         }
@@ -53,11 +53,11 @@ namespace geoh {
             z /= k; x /= k; y /= k;
             return *this;
         }
-    
+
         inline const irr norm() const {
             return z * z - PHI * (x * x + y * y);
         }
-    
+
         inline bool operator==(const Vec& b) const {
             return z == b.z && x == b.x && y == b.y;
         }
@@ -77,7 +77,7 @@ namespace geoh {
             return z != b.z ? z > b.z : x != b.x ? x > b.x : y >= b.y;
         }
     };
-    
+
     inline const Vec operator*(const irr& k, const Vec& a) {
         return Vec(k * a.z, k * a.x, k * a.y);
     }
@@ -91,7 +91,7 @@ namespace geoh {
             a.x * b.z - a.z * b.x
         );
     }
-    
+
     struct Mat {
         static const Mat identity;
 
@@ -115,7 +115,7 @@ namespace geoh {
             zz(zz), zx(zx), zy(zy),
             xz(xz), xx(xx), xy(xy),
             yz(yz), yx(yx), yy(yy) {}
-        
+
         operator string() const {
             return "[\n"
                 + string(zz) + ", " + string(zx) + ", " + string(zy) + "\n"
