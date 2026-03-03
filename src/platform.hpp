@@ -87,7 +87,6 @@ private:
                     case sf::Keyboard::Scancode::Equal:
                         double_time();
                         break;
-                    default:;
                 }
             }
         }

@@ -5,6 +5,7 @@
 namespace gridlines {
     using namespace geoh;
     using namespace std;
+
     const Vec rot(const Vec& a, const Vec& b) {
         return a * dot(a, b) - cross(a, b);
     }
@@ -14,8 +15,9 @@ namespace gridlines {
     const Vec rot_clockwise(const Vec& a, const Vec& b) {
         return a * dot(a, b) + cross(a, b);
     }
-    const unsigned steps = 0x10;
+
     const irr MAXZ = 128;
+
     struct Tile {
         unsigned prec;
         Vec pos;
@@ -23,6 +25,7 @@ namespace gridlines {
         Tile(): prec(), pos() {}
         Tile(unsigned prec, const Vec& pos): prec(prec), pos(pos) {}
     };
+
     class GridLines {
     public:
         unsigned n = 5;

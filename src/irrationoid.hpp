@@ -198,15 +198,15 @@ namespace irrationoid {
     }
 
     template<typename T, T p> const Irrationoid<T, p> operator+(const T& a, const Irrationoid<T, p>& b) {
-        return b.operator+(a);
+        return b + a;
     }
     template<typename T, T p> const Irrationoid<T, p> operator-(const T& a, const Irrationoid<T, p>& b) {
-        return (-b).operator+(a);
+        return -b + a;
     }
     template<typename T, T p> const Irrationoid<T, p> operator*(const T& a, const Irrationoid<T, p>& b) {
-        return b.operator*(a);
+        return b * a;
     }
     template<typename T, T p> const Irrationoid<T, p> operator/(const T& a, const Irrationoid<T, p>& b) {
-        return b.inverse().operator*(a);
+        return b.inverse() * a;
     }
 }

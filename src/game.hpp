@@ -5,7 +5,6 @@
 #include <queue>
 #include <set>
 #include <random>
-#include <iostream>
 
 namespace snakh {
     using namespace geoh;
