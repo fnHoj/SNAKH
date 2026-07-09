@@ -57,7 +57,7 @@ private:
         while (const auto event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>())
                 window.close();
-            else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+            else if (const auto keyPressed = event->getIf<sf::Event::KeyPressed>()) {
                 switch (keyPressed->scancode) {
                     case sf::Keyboard::Scancode::Escape:
                         window.close();

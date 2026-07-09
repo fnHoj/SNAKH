@@ -52,17 +52,8 @@ namespace snakh {
         Mat to_orig;
         Mat to_head;
 
-        inline const Vec transform_at_head(const Mat& mat, const Vec& v) const {
-            return to_head * (mat * (to_orig * v));
-        }
-        inline const Vec transform_at_head(const Vec& v, const Mat& mat) const {
-            return to_head * (mat * (to_orig * v));
-        }
-
         bool append(const Vec& p) {
-            if (dead)
-                return false;
-            if (!is_snake.insert(p).second)
+            if (dead || !is_snake.insert(p).second)
                 return false;
             snake.push(p);
             return true;

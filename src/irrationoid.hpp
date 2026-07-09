@@ -49,7 +49,7 @@ namespace irrationoid {
             else
                 return (p*b*b > a*a) ? 1 : -1;
         }
-        explicit operator bool() const {
+        inline explicit operator bool() const {
             return sign();
         }
 
